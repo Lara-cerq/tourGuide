@@ -21,33 +21,22 @@ public class GpsUtilService {
 	public GpsUtilService() {
 		gpsUtil = new GpsUtil();
 	}
-//
-//	private ExecutorService executor = Executors.newFixedThreadPool(10000);
-//
+	
 	public List<Attraction> getAttractions() {
 		return gpsUtil.getAttractions();
 	}
 	public VisitedLocation getUserLocation(UUID userId) {
 		return gpsUtil.getUserLocation(userId);
 	}
-//
-//	public void submitLocation(User user, TourGuideService tourGuideService ) {
-//		CompletableFuture.supplyAsync(() -> {
-//			return tourGuideService.getUserLocation(user);
-//		}, executor).thenAccept(visitedLocation -> {
-//			tourGuideService.finalizeLocation(user, visitedLocation);
-//		});
-//	}
 	
-	public void newUserLocation(User user, TourGuideService tourGuideService) {
-		ExecutorService executor = Executors.newFixedThreadPool(100000); 
-//		for (User user : userList) {
+	public void userLocation(List<User> userList, TourGuideService tourGuideService) {
+		ExecutorService executor = Executors.newFixedThreadPool(1000); 
+		for (User user : userList) {
 			Runnable runnableTask = () -> {
 				tourGuideService.getUserLocation(user);
 			};
 			executor.execute(runnableTask);
-//		}
-			System.out.println("///");
+		}
 		executor.shutdown();
 	}
 

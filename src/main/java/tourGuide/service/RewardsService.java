@@ -54,7 +54,7 @@ public class RewardsService {
 	}
 		
 	public void newCalculateRewards(List<User> userList) {
-		ExecutorService executor = Executors.newFixedThreadPool(100);
+		ExecutorService executor = Executors.newFixedThreadPool(1000);
 		for (User user : userList) {
 			Runnable runnableTask = () -> {
 				calculateRewards(user);

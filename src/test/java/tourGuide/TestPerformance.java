@@ -91,6 +91,8 @@ public class TestPerformance {
 	     
 	    allUsers.forEach(u -> rewardsService.calculateRewards(u));
 	    
+		 rewardsService.newCalculateRewards(allUsers);
+	    
 		for(User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);
 		}
